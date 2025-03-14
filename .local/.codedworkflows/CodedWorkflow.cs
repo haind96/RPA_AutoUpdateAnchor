@@ -22,7 +22,7 @@ namespace RPA_AutoUpdateAnchor
         private Lazy<ConnectionsManager> _connectionsManagerLazy;
         public CodedWorkflow()
         {
-            _ = new System.Type[]{typeof(UiPath.GSuite.Activities.Api.IGoogleConnectionsService), typeof(UiPath.Excel.Activities.API.IExcelService), typeof(UiPath.Core.Activities.API.ISystemService), typeof(UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService)};
+            _ = new System.Type[]{typeof(UiPath.Excel.Activities.API.IExcelService), typeof(UiPath.Core.Activities.API.ISystemService), typeof(UiPath.GSuite.Activities.Api.IGoogleConnectionsService), typeof(UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService)};
             _workflowRunnerServiceLazy = new Lazy<global::RPA_AutoUpdateAnchor.WorkflowRunnerService>(() => new global::RPA_AutoUpdateAnchor.WorkflowRunnerService(this.services));
 #pragma warning disable
             _connectionsManagerLazy = new Lazy<ConnectionsManager>(() => new ConnectionsManager(serviceContainer));
