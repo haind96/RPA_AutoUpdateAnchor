@@ -22179,16 +22179,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Admin\\.nuget\\packages\\": {}
+    "C:\\Users\\Admin\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "restore": {
-      "projectUniqueName": "RPA_GeneratedDocument",
-      "projectName": "RPA_GeneratedDocument",
-      "projectPath": "D:\\1.Project\\Uipath\\RPA_GeneratedDocument\\.local",
+      "projectUniqueName": "RPA_AutoUpdateAnchor",
+      "projectName": "RPA_AutoUpdateAnchor",
+      "projectPath": "D:\\1.Projects\\RPA_AutoUpdateAnchor\\.local",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\1.Project\\Uipath\\RPA_GeneratedDocument\\.local",
-      "UsingMicrosoftNETSdk": false
+      "outputPath": "D:\\1.Projects\\RPA_AutoUpdateAnchor\\.local",
+      "UsingMicrosoftNETSdk": false,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ]
     },
     "frameworks": {
       "net8.0-windows7.0": {
