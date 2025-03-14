@@ -1,0 +1,45 @@
+{
+  "DisplayName": "Process",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "UrlSpreadSheet",
+      "DisplayName": "UrlSpreadSheet",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "https://docs.google.com/spreadsheets/d/1Pbi7RfS_9XBuuqSwE4GtV5Rukpy3qa3nzj0B9uZlHrM/edit?gid=0#gid=0",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "GroupSize",
+      "DisplayName": "GroupSize",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "40",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "GoogleCredential",
+      "DisplayName": "GoogleCredential",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "D:\\1.Project\\Uipath\\GoogleCredential\\credentials.json",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}

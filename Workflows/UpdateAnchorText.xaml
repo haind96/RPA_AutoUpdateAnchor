@@ -1,0 +1,450 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" this:Process.in_strGoogleCredential="D:\1.Project\Uipath\GoogleCredential\credentials.json" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:uga="clr-namespace:UiPath.GSuite.Activities;assembly=UiPath.GSuite.Activities" xmlns:ugade="clr-namespace:UiPath.GSuite.Activities.Drive.Enums;assembly=UiPath.GSuite.Activities" xmlns:ugam="clr-namespace:UiPath.GSuite.Activities.Models;assembly=UiPath.GSuite.Activities" xmlns:ugdm="clr-namespace:UiPath.GSuite.Drive.Models;assembly=UiPath.GSuite" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:usau="clr-namespace:UiPath.Shared.Activities.Utils;assembly=UiPath.GSuite.Activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_strGoogleCredential" Type="InArgument(x:String)" />
+    <x:Property Name="in_strInputKey" Type="InArgument(x:String)" />
+    <x:Property Name="io_dt_Generated" Type="InOutArgument(sd:DataTable)" />
+    <x:Property Name="in_gdriveFolder" Type="InArgument(ugdm:GDriveRemoteItem)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Process_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.GSuite.Activities.Sheets.Filters</x:String>
+      <x:String>UiPath.GSuite.Activities.Filters</x:String>
+      <x:String>UiPath.GSuite.Sheets.Enums</x:String>
+      <x:String>UiPath.GSuite.Activities.Models</x:String>
+      <x:String>UiPath.GSuite.Drive.Models</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.GSuite.Activities.Utilities</x:String>
+      <x:String>UiPath.Productivity.Activities.Diagnostics</x:String>
+      <x:String>UiPath.GSuite.Activities.Sheets.Triggers</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Shared.Activities.ConnectionService.Contracts</x:String>
+      <x:String>UiPath.GSuite.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.GSuite.Activities.Sheets.Enums</x:String>
+      <x:String>UiPath.GSuite.Sheets.Models</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive.Enums</x:String>
+      <x:String>UiPath.Shared.Activities.Utils</x:String>
+      <x:String>UiPath.Shared.Activities.Business</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.GSuite</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive.Filters</x:String>
+      <x:String>UiPath.GSuite.Drive.Enums</x:String>
+      <x:String>UiPath.Productivity.Activities.Persistence</x:String>
+      <x:String>UiPath.Sdk.Activities</x:String>
+      <x:String>UiPath.Sdk.Activities.DependencyInjection.Contracts</x:String>
+      <x:String>UiPath.Sdk.Activities.DependencyInjection</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive.Triggers</x:String>
+      <x:String>UiPath.GSuite.Activities.Drive</x:String>
+      <x:String>UiPath.GSuite.Activities.Docs.Enums</x:String>
+      <x:String>Google.Apis.Auth.OAuth2</x:String>
+      <x:String>Google.Apis.Services</x:String>
+      <x:String>Google.Apis.Docs.v1</x:String>
+      <x:String>Google.Apis.Docs.v1.Data</x:String>
+      <x:String>System.Threading</x:String>
+      <x:String>System.Threading.Tasks</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.GSuite</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Word.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable1</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable1</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Word.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable2</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable3</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable2</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable2</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>Studio.Generated.TypedDataTable4</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>Google.Apis.Auth</AssemblyReference>
+      <AssemblyReference>Google.Apis</AssemblyReference>
+      <AssemblyReference>Google.Apis.Docs.v1</AssemblyReference>
+      <AssemblyReference>System.Threading.AccessControl</AssemblyReference>
+      <AssemblyReference>System.Threading</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>System.Threading.Tasks.Parallel</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>RPA_AutoUpdateAnchor.Core</AssemblyReference>
+      <AssemblyReference>RPA_AutoUpdateAnchor.Core</AssemblyReference>
+      <AssemblyReference>RPA_AutoUpdateAnchor.Core</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="722,2492" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="strFileId" />
+      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Name="dictAnchorLinks" />
+      <Variable x:TypeArguments="x:String" Name="strUpdateResult" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ParallelForEach x:TypeArguments="sd:DataRow" DisplayName="Parallel For Each currentDataTable" sap:VirtualizedContainerService.HintSize="556,2469" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_5" Values="[io_dt_Generated.AsEnumerable]">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <ActivityAction x:TypeArguments="sd:DataRow">
+        <ActivityAction.Argument>
+          <DelegateInArgument x:TypeArguments="sd:DataRow" Name="row" />
+        </ActivityAction.Argument>
+        <TryCatch DisplayName="Try Catch Get Content" sap:VirtualizedContainerService.HintSize="506,2296" sap2010:WorkflowViewState.IdRef="TryCatch_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch.Try>
+            <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="504,1727" sap2010:WorkflowViewState.IdRef="Sequence_55">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <If Condition="[Not String.IsNullOrEmpty(row(3).ToString) AndAlso ( String.IsNullOrEmpty(row(10).ToString) OrElse  row(10).ToString.Trim.ToLower.Contains(&quot;thất bại&quot;) )]" DisplayName="If Check Condition" sap:VirtualizedContainerService.HintSize="470,1667" sap2010:WorkflowViewState.IdRef="If_5">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <If.Then>
+                  <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="468,1449" sap2010:WorkflowViewState.IdRef="Sequence_56">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="strDocumentUrl" />
+                    </Sequence.Variables>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <Assign DisplayName="Assign strDocumentUrl" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_29">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strDocumentUrl]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[row(3).ToString.Trim]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <TryCatch DisplayName="tc_copy_file_to_backup" sap:VirtualizedContainerService.HintSize="434,57" sap2010:WorkflowViewState.IdRef="TryCatch_8">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                      <TryCatch.Try>
+                        <uga:CopyFileConnections BrowserFileId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" File="{x:Null}" FileFriendlyName="{x:Null}" Folder="{x:Null}" FolderIdBackup="{x:Reference __ReferenceID0}" NewFileName="{x:Null}" Result="{x:Null}" AuthScopesInvalid="False" BrowserFolderId="root" ConflictResolution="AddSeparate" ConnectionId="9ec480b7-fae9-4cdd-92ec-3d02a4f03c90" DisplayName="Copy File To Backup" FileInputMode="UrlOrId" FolderFriendlyName="My Drive" FolderInputMode="UrlOrId" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="CopyFileConnections_1" ManualFileId="[strDocumentUrl]" ManualFolderId="[in_gdriveFolder.Url]" UseConnectionService="True">
+                          <uga:CopyFileConnections.Destination>
+                            <ugam:DriveItemArgument ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Existing="{x:Null}" FullPath="{x:Null}" ParentId="{x:Null}" ParentIdFriendlyName="{x:Null}" RelativePath="{x:Null}" BrowserId="root" FriendlyName="My Drive" FullPathHint="My Drive" IdOrUrl="[in_gdriveFolder.Url]" InputMode="UrlOrId">
+                              <ugam:DriveItemArgument.Backup>
+                                <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID0" StoredValue="UrlOrId">
+                                  <usau:BackupSlot.BackupValues>
+                                    <scg:List x:TypeArguments="x:Object" x:Key="Browse" Capacity="2">
+                                      <InArgument x:TypeArguments="x:String">root</InArgument>
+                                      <InArgument x:TypeArguments="x:String">My Drive</InArgument>
+                                    </scg:List>
+                                  </usau:BackupSlot.BackupValues>
+                                </usau:BackupSlot>
+                              </ugam:DriveItemArgument.Backup>
+                              <ugam:DriveItemArgument.ParentIdFullPathHint>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ugam:DriveItemArgument.ParentIdFullPathHint>
+                            </ugam:DriveItemArgument>
+                          </uga:CopyFileConnections.Destination>
+                          <uga:CopyFileConnections.FileIdBackup>
+                            <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID1" StoredValue="UrlOrId">
+                              <usau:BackupSlot.BackupValues>
+                                <scg:List x:TypeArguments="x:Object" x:Key="Browse" Capacity="2">
+                                  <x:Null />
+                                  <x:Null />
+                                </scg:List>
+                              </usau:BackupSlot.BackupValues>
+                            </usau:BackupSlot>
+                          </uga:CopyFileConnections.FileIdBackup>
+                          <uga:CopyFileConnections.Item>
+                            <ugam:DriveItemArgument Backup="{x:Reference __ReferenceID1}" BrowserId="{x:Null}" ConnectionDescriptor="{x:Null}" ConnectionKey="{x:Null}" Existing="{x:Null}" FriendlyName="{x:Null}" FullPath="{x:Null}" ParentId="{x:Null}" ParentIdFriendlyName="{x:Null}" RelativePath="{x:Null}" IdOrUrl="[strDocumentUrl]" InputMode="UrlOrId">
+                              <ugam:DriveItemArgument.FullPathHint>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ugam:DriveItemArgument.FullPathHint>
+                              <ugam:DriveItemArgument.ParentIdFullPathHint>
+                                <InArgument x:TypeArguments="x:String">
+                                  <Literal x:TypeArguments="x:String" Value="" />
+                                </InArgument>
+                              </ugam:DriveItemArgument.ParentIdFullPathHint>
+                            </ugam:DriveItemArgument>
+                          </uga:CopyFileConnections.Item>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </uga:CopyFileConnections>
+                      </TryCatch.Try>
+                      <TryCatch.Catches>
+                        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_8">
+                          <ActivityAction x:TypeArguments="s:Exception">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_60">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </ActivityAction>
+                        </Catch>
+                      </TryCatch.Catches>
+                      <TryCatch.Finally>
+                        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,89" sap2010:WorkflowViewState.IdRef="Sequence_61">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </Sequence>
+                      </TryCatch.Finally>
+                    </TryCatch>
+                    <Assign DisplayName="Assign strFileId" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_18">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[strFileId]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[Regex.Match(strDocumentUrl, "document\/d\/([^\/]+)").Groups(1).Value]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign dictAnchorLinks New" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_23">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[dictAnchorLinks]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)">[New Dictionary(of String,String)]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign 4 -5" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_25">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[dictAnchorLinks(row(4).ToString.Trim)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[row(5).ToString.Trim]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign 6 -7" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_27">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[dictAnchorLinks(row(6).ToString.Trim)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[row(7).ToString.Trim]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign 8-9" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_28">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[dictAnchorLinks(row(8).ToString.Trim)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[row(9).ToString.Trim]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Trace" Message="[&quot;Cập nhật anchor text file với URL : &quot; + strDocumentUrl+vbNewLine+&#xA;&quot;Danh sách anchor text : &quot;+dictAnchorLinks.Count.ToString]" />
+                    <ui:InvokeCode ContinueOnError="{x:Null}" Code="try&#xA;{&#xA;    var credential = GoogleCredential.FromFile(credentialsPath)&#xA;        .CreateScoped(new[] { DocsService.Scope.Documents });&#xA;&#xA;    var docsService = new DocsService(new BaseClientService.Initializer&#xA;    {&#xA;        HttpClientInitializer = credential,&#xA;        ApplicationName = &quot;Google Docs Link Inserter&quot;&#xA;    });&#xA;&#xA;    var doc = docsService.Documents.Get(fileId).Execute();&#xA;&#xA;    List&lt;Request&gt; requests = new List&lt;Request&gt;();&#xA;    HashSet&lt;string&gt; insertedAnchors = new HashSet&lt;string&gt;();&#xA;    Dictionary&lt;string, string&gt; remainingLinks = new Dictionary&lt;string, string&gt;(anchorLinks);&#xA;    string lastAnchorKey = remainingLinks.Keys.LastOrDefault();&#xA;    int totalOffset = 0;&#xA;    int paragraphIndex = 0;&#xA;    bool skipEvenCheck = false;&#xA;&#xA;    foreach (var element in doc.Body.Content)&#xA;    {&#xA;        if (element.Paragraph != null)&#xA;        {&#xA;            var style = element.Paragraph.ParagraphStyle;&#xA;            if (style != null &amp;&amp; (style.NamedStyleType == &quot;HEADING_1&quot; ||&#xA;                                  style.NamedStyleType == &quot;HEADING_2&quot; ||&#xA;                                  style.NamedStyleType == &quot;HEADING_3&quot; ||&#xA;                                  style.NamedStyleType == &quot;HEADING_4&quot;))&#xA;                continue;&#xA;&#xA;            paragraphIndex++;&#xA;&#xA;            // Kiểm tra nếu là số lẻ hoặc đang ở chế độ bỏ qua số chẵn&#xA;            if (!skipEvenCheck &amp;&amp; paragraphIndex % 2 == 0)&#xA;                continue;&#xA;&#xA;            skipEvenCheck = false; // Reset flag&#xA;&#xA;            bool foundInThisParagraph = false;&#xA;            string text = &quot;&quot;;&#xA;            int startIndex = -1, endIndex = -1;&#xA;&#xA;            foreach (var textElement in element.Paragraph.Elements)&#xA;            {&#xA;                if (textElement.TextRun != null)&#xA;                {&#xA;                    text += textElement.TextRun.Content;&#xA;                    if (startIndex == -1)&#xA;                        startIndex = (textElement.StartIndex ?? 0) + totalOffset;&#xA;                    endIndex = (textElement.StartIndex ?? 0) + textElement.TextRun.Content.Length + totalOffset;&#xA;                }&#xA;            }&#xA;&#xA;            // Nếu không có inputKey trong đoạn số lẻ, bỏ qua kiểm tra số thứ tự và xét đoạn kế tiếp&#xA;            if ( !text.Contains(inputKey.ToLower()) &amp;&amp; !text.Contains(inputKey.ToUpper()))&#xA;            {&#xA;                skipEvenCheck = true;&#xA;&#x9;&#x9;&#x9;&#x9;//Console.WriteLine($&quot;Đang xử lý đoạn văn không chứa từ khóa chính {paragraphIndex}: \&quot;{text.Trim()}\&quot;&quot;);&#xA;                continue;&#xA;            } else {&#xA;&#x9;&#x9;&#x9;&#x9; //Console.WriteLine($&quot;Đang xử lý đoạn văn chứa từ khóa chính {paragraphIndex}: \&quot;{text.Trim()}\&quot;&quot;);&#xA;&#x9;&#x9;&#x9;}&#xA;&#xA;            foreach (var anchor in new Dictionary&lt;string, string&gt;(remainingLinks))&#xA;            {&#xA;                if (anchor.Key != lastAnchorKey &amp;&amp; !insertedAnchors.Contains(anchor.Key) &amp;&amp; (text.Contains(inputKey.ToLower()) || text.Contains(inputKey.ToUpper()) ) )&#xA;                {&#xA;                    int matchIndex = text.IndexOf(inputKey.ToLower());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;if (matchIndex == -1)&#xA;                    {&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;matchIndex = text.IndexOf(inputKey.ToUpper());&#xA;&#x9;&#x9;&#x9;&#x9;&#x9;}&#xA;                    if (matchIndex != -1)&#xA;                    {&#xA;                        int insertIndex = startIndex + matchIndex;&#xA;&#xA;                        requests.Add(new Request&#xA;                        {&#xA;                            DeleteContentRange = new DeleteContentRangeRequest&#xA;                            {&#xA;                                Range = new Google.Apis.Docs.v1.Data.Range&#xA;                                {&#xA;                                    StartIndex = insertIndex,&#xA;                                    EndIndex = insertIndex + inputKey.Length&#xA;                                }&#xA;                            }&#xA;                        });&#xA;&#xA;                        requests.Add(new Request&#xA;                        {&#xA;                            InsertText = new InsertTextRequest&#xA;                            {&#xA;                                Text = anchor.Key,&#xA;                                Location = new Google.Apis.Docs.v1.Data.Location&#xA;                                {&#xA;                                    Index = insertIndex&#xA;                                }&#xA;                            }&#xA;                        });&#xA;&#xA;                        requests.Add(new Request&#xA;                        {&#xA;                            UpdateTextStyle = new UpdateTextStyleRequest&#xA;                            {&#xA;                                Range = new Google.Apis.Docs.v1.Data.Range&#xA;                                {&#xA;                                    StartIndex = insertIndex,&#xA;                                    EndIndex = insertIndex + anchor.Key.Length&#xA;                                },&#xA;                                TextStyle = new TextStyle&#xA;                                {&#xA;                                    Link = new Link { Url = anchor.Value }&#xA;                                },&#xA;                                Fields = &quot;link&quot;&#xA;                            }&#xA;                        });&#xA;&#xA;                        //Console.WriteLine($&quot;Thay thế {inputKey} -&gt; {anchor.Key} và gắn link {anchor.Value}&quot;);&#xA;                        insertedAnchors.Add(anchor.Key);&#xA;                        remainingLinks.Remove(anchor.Key);&#xA;                        foundInThisParagraph = true;&#xA;                        totalOffset += anchor.Key.Length - inputKey.Length;&#xA;                        break;&#xA;                    }&#xA;                }&#xA;            }&#xA;&#xA;            // Xử lý anchor cuối cùng hoặc nếu đã đến đoạn cuối mà vẫn còn anchor&#xA;&#x9;&#x9;&#x9;//if (remainingLinks.Count &gt; 0 &amp;&amp; (lastAnchorKey == remainingLinks.Keys.First() || paragraphIndex == doc.Body.Content.Count))&#xA;            if (!foundInThisParagraph &amp;&amp; remainingLinks.Count &gt; 0 &amp;&amp; (lastAnchorKey == remainingLinks.Keys.First() || paragraphIndex == doc.Body.Content.Count))&#x9;&#x9;&#x9;&#xA;            {&#xA;                foreach (var missing in new Dictionary&lt;string, string&gt;(remainingLinks))&#xA;                {&#xA;                    int xemThemLength = &quot;Xem thêm &quot;.Length;&#xA;                    int anchorLength = missing.Key.Length + 1; // +1 vì có \n sau anchor&#xA;&#xA;                    // **Chèn &quot;Xem thêm&quot; ngay sau đoạn văn cuối cùng**&#xA;                    requests.Add(new Request&#xA;                    {&#xA;                        InsertText = new InsertTextRequest&#xA;                        {&#xA;                            Text = &quot;Xem thêm &quot;,&#xA;                            Location = new Google.Apis.Docs.v1.Data.Location { Index = endIndex }&#xA;                        }&#xA;                    });&#xA;&#xA;                    // **Chèn anchor text kèm \n sau nó**&#xA;                    requests.Add(new Request&#xA;                    {&#xA;                        InsertText = new InsertTextRequest&#xA;                        {&#xA;                            Text = missing.Key + &quot;\n&quot;,&#xA;                            Location = new Google.Apis.Docs.v1.Data.Location { Index = endIndex + xemThemLength }&#xA;                        }&#xA;                    });&#xA;&#xA;                    // **Gắn link cho anchor cuối cùng**&#xA;                    requests.Add(new Request&#xA;                    {&#xA;                        UpdateTextStyle = new UpdateTextStyleRequest&#xA;                        {&#xA;                            Range = new Google.Apis.Docs.v1.Data.Range&#xA;                            {&#xA;                                StartIndex = endIndex + xemThemLength,&#xA;                                EndIndex = endIndex + xemThemLength + missing.Key.Length&#xA;                            },&#xA;                            TextStyle = new TextStyle&#xA;                            {&#xA;                                Link = new Link { Url = missing.Value }&#xA;                            },&#xA;                            Fields = &quot;link&quot;&#xA;                        }&#xA;                    });&#xA;&#xA;                    // **Định dạng đoạn văn chứa &quot;Xem thêm &lt;anchor&gt;\n&quot; thành Paragraph**&#xA;                    requests.Add(new Request&#xA;                    {&#xA;                        UpdateParagraphStyle = new UpdateParagraphStyleRequest&#xA;                        {&#xA;                            Range = new Google.Apis.Docs.v1.Data.Range&#xA;                            {&#xA;                                StartIndex = endIndex,&#xA;                                EndIndex = endIndex + xemThemLength + missing.Key.Length + 1&#xA;                            },&#xA;                            ParagraphStyle = new ParagraphStyle&#xA;                            {&#xA;                                NamedStyleType = &quot;NORMAL_TEXT&quot;&#xA;                            },&#xA;                            Fields = &quot;namedStyleType&quot;&#xA;                        }&#xA;                    });&#xA;&#xA;                    //Console.WriteLine($&quot;Chèn anchor cuối: 'Xem thêm {missing.Key}\\n' (Link: {missing.Value})&quot;);&#xA;                    insertedAnchors.Add(missing.Key);&#xA;                    remainingLinks.Remove(missing.Key);&#xA;                    totalOffset += xemThemLength + anchorLength;&#xA;                }&#xA;            }&#xA;&#xA;            if (remainingLinks.Count == 0)&#xA;                break;&#xA;        }&#xA;    }&#xA;&#xA;    if (requests.Count &gt; 0)&#xA;    {&#xA;        var batchUpdateRequest = new BatchUpdateDocumentRequest { Requests = requests };&#xA;        docsService.Documents.BatchUpdate(batchUpdateRequest, fileId).Execute();&#xA;&#x9;&#x9;updateResult = &quot;Thành công&quot;;&#xA;    } else {&#xA;&#x9;&#x9;updateResult = &quot;Thất bại do không có request nào cập nhật anchor text&quot;;&#xA;&#x9;}&#xA;}&#xA;catch (Exception ex)&#xA;{&#xA;&#x9;updateResult = &quot;Thất bại : &quot; + ex.Message;&#xA;    //Console.WriteLine(&quot;Error: &quot; + ex.Message);&#xA;}&#xA;" DisplayName="Invoke Code UpdateAnchor" sap:VirtualizedContainerService.HintSize="434,197" sap2010:WorkflowViewState.IdRef="InvokeCode_15" Language="CSharp">
+                      <ui:InvokeCode.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="fileId">[strFileId]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="credentialsPath">[in_strGoogleCredential]</InArgument>
+                        <InArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="anchorLinks">[dictAnchorLinks]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="inputKey">[in_strInputKey]</InArgument>
+                        <OutArgument x:TypeArguments="x:String" x:Key="updateResult">[strUpdateResult]</OutArgument>
+                      </ui:InvokeCode.Arguments>
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </ui:InvokeCode>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,173" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[strUpdateResult]" />
+                    <Assign DisplayName="Assign Row NOTE" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_20">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[row(10)]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">[strUpdateResult]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </If.Then>
+                <If.Else>
+                  <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,89" sap2010:WorkflowViewState.IdRef="Sequence_57">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Sequence>
+                </If.Else>
+              </If>
+            </Sequence>
+          </TryCatch.Try>
+          <TryCatch.Catches>
+            <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_7">
+              <ActivityAction x:TypeArguments="s:Exception">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="504,338" sap2010:WorkflowViewState.IdRef="Sequence_58">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign Row Note" sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_22">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Object">[row(10)]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Object">["Thất bại"]</InArgument>
+                    </Assign.Value>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="470,164" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Error" Message="[&quot;Lỗi : &quot;+row(1).ToString.Trim+&quot;----&quot;+exception.Message]">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:LogMessage>
+                </Sequence>
+              </ActivityAction>
+            </Catch>
+          </TryCatch.Catches>
+          <TryCatch.Finally>
+            <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="504,89" sap2010:WorkflowViewState.IdRef="Sequence_59">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </Sequence>
+          </TryCatch.Finally>
+        </TryCatch>
+      </ActivityAction>
+    </ParallelForEach>
+  </Sequence>
+</Activity>

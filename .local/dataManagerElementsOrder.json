@@ -1,0 +1,142 @@
+{
+  "Workflows": [
+    {
+      "Path": null,
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": null,
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "GeneratedDocument.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "listBoldTexts&Sequence_1",
+        "listHeading4Texts&Sequence_1",
+        "listMatchesHeading&Sequence_45",
+        "listMatchesTexts&Sequence_46",
+        "strFindMatch&Sequence_47",
+        "strReplaceMatch&Sequence_47",
+        "strFindMatch&Sequence_44",
+        "strReplaceMatch&Sequence_44",
+        "listTitleTexts&Sequence_1",
+        "strReplaceMatch&Sequence_12",
+        "gdirveDocument&Sequence_1",
+        "strTextGenerated&Sequence_1",
+        "listHeading1Texts&Sequence_1",
+        "listHeading2Texts&Sequence_1",
+        "listHeading3Texts&Sequence_1",
+        "strFindMatch&Sequence_12"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_strGoogleCredential",
+        "in_gdriveFolder",
+        "in_boolTexts",
+        "in_strContent",
+        "out_strUrl",
+        "in_strPrompt"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Main.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dt_GetContents&Sequence_12",
+        "gdriveFolder&Sequence_12",
+        "strInputKey&Sequence_24",
+        "strUrlFolderDrive&Sequence_24",
+        "listSubTables&Sequence_26",
+        "dt_CloneContents&Sequence_26",
+        "strUrl&Sequence_2",
+        "strKey&Sequence_2",
+        "dt_CopyContents&Sequence_27"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "UrlSpreadSheet",
+        "GroupSize",
+        "GoogleCredential"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Sequence.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Process.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dt_Clone&Sequence_26",
+        "listSubTables&Sequence_26",
+        "strUrl&Sequence_28",
+        "strKey&Sequence_28",
+        "dt_GetContents&Sequence_12",
+        "gdriveFolder&Sequence_12",
+        "strUrlFolderDrive&Sequence_12",
+        "strUrl&Sequence_2",
+        "strKey&Sequence_2"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "GoogleCredential",
+        "GroupSize",
+        "Prompt",
+        "BoldText",
+        "UrlSpreadSheet"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Comment.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "dt_Link&Sequence_1",
+        "index&Sequence_1",
+        "brsChrome&Sequence_2",
+        "strPath&Sequence_2"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Facebook.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "subTables&Sequence_1",
+        "dt1&Sequence_1",
+        "str2&Sequence_1",
+        "str1&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    },
+    {
+      "Path": "Workflows/UpdateAnchorText.xaml",
+      "SortBy": 0,
+      "VariablesSectionElementsOrder": [
+        "strDocumentUrl&Sequence_56",
+        "strUpdateResult&Sequence_1",
+        "dictAnchorLinks&Sequence_1",
+        "strFileId&Sequence_1"
+      ],
+      "ArgumentsSectionElementsOrder": [
+        "in_gdriveFolder",
+        "io_dt_Generated",
+        "in_strInputKey",
+        "in_strGoogleCredential"
+      ],
+      "ConstantsSectionElementsOrder": [],
+      "AddedNamespaces": null
+    }
+  ]
+}
