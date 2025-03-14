@@ -124,10 +124,9 @@
       "Path": "Workflows/UpdateAnchorText.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
-        "bolAnchorEnd&Sequence_56",
+        "strImageUrl&Sequence_56",
         "strUpdateResult&TryCatch_7",
         "strDocumentUrl&TryCatch_7",
-        "imageUrl&Sequence_56",
         "dictAnchorLinks&Sequence_1",
         "strFileId&Sequence_1"
       ],
