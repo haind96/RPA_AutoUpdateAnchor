@@ -37,28 +37,6 @@
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32)">
-            <summary>
-            Invokes the Framework/SetTransactionStatus.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            Invokes the Framework/SetTransactionStatus.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllSettings(System.String,System.String[])">
-            <summary>
-            Invokes the Framework/InitAllSettings.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllSettings(System.String,System.String[],System.Boolean)">
-            <summary>
-            Invokes the Framework/InitAllSettings.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
         <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.GetTransactionData(System.Int32,System.Collections.Generic.Dictionary{System.String,System.Object},System.Data.DataTable)">
             <summary>
             Invokes the Framework/GetTransactionData.xaml
@@ -67,39 +45,6 @@
         <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.GetTransactionData(System.Int32,System.Collections.Generic.Dictionary{System.String,System.Object},System.Data.DataTable,System.Boolean)">
             <summary>
             Invokes the Framework/GetTransactionData.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllApplications(System.Collections.Generic.Dictionary{System.String,System.Object})">
-            <summary>
-            Invokes the Framework/InitAllApplications.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllApplications(System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean)">
-            <summary>
-            Invokes the Framework/InitAllApplications.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses">
-            <summary>
-            Invokes the Framework/KillAllProcesses.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses(System.Boolean)">
-            <summary>
-            Invokes the Framework/KillAllProcesses.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.CloseAllApplications">
-            <summary>
-            Invokes the Framework/CloseAllApplications.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.CloseAllApplications(System.Boolean)">
-            <summary>
-            Invokes the Framework/CloseAllApplications.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
@@ -114,14 +59,58 @@
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.Workflow">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllSettings(System.String,System.String[])">
             <summary>
-            Invokes the Workflow.cs
+            Invokes the Framework/InitAllSettings.xaml
             </summary>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.Workflow(System.Boolean)">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllSettings(System.String,System.String[],System.Boolean)">
             <summary>
-            Invokes the Workflow.cs
+            Invokes the Framework/InitAllSettings.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.CloseAllApplications">
+            <summary>
+            Invokes the Framework/CloseAllApplications.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.CloseAllApplications(System.Boolean)">
+            <summary>
+            Invokes the Framework/CloseAllApplications.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Invokes the Framework/SetTransactionStatus.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Invokes the Framework/SetTransactionStatus.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses">
+            <summary>
+            Invokes the Framework/KillAllProcesses.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses(System.Boolean)">
+            <summary>
+            Invokes the Framework/KillAllProcesses.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllApplications(System.Collections.Generic.Dictionary{System.String,System.Object})">
+            <summary>
+            Invokes the Framework/InitAllApplications.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.InitAllApplications(System.Collections.Generic.Dictionary{System.String,System.Object},System.Boolean)">
+            <summary>
+            Invokes the Framework/InitAllApplications.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>

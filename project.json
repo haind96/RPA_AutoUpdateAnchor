@@ -15,7 +15,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "23.10.0.0",
-  "projectVersion": "1.0.1",
+  "projectVersion": "1.0.2",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
@@ -53,12 +53,6 @@
     {
       "filePath": "Main.xaml",
       "uniqueId": "ee8a04de-36eb-410f-9480-e723ab7e8ad3",
-      "input": [],
-      "output": []
-    },
-    {
-      "filePath": "Workflow.cs",
-      "uniqueId": "ac1f11f9-1274-44b6-a2cb-49b907a15553",
       "input": [],
       "output": []
     }
