@@ -4,14 +4,14 @@
         <name>RPA_AutoUpdateAnchor.Core</name>
     </assembly>
     <members>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32)">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.UpdateAnchorText(System.String,System.String,UiPath.GSuite.Drive.Models.GDriveRemoteItem,System.Data.DataTable)">
             <summary>
-            Invokes the Framework/SetTransactionStatus.xaml
+            Invokes the Workflows/UpdateAnchorText.xaml
             </summary>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32,System.Boolean)">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.UpdateAnchorText(System.String,System.String,UiPath.GSuite.Drive.Models.GDriveRemoteItem,System.Data.DataTable,System.Boolean)">
             <summary>
-            Invokes the Framework/SetTransactionStatus.xaml
+            Invokes the Workflows/UpdateAnchorText.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
@@ -23,6 +23,28 @@
         <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.Main(System.String,System.Int32,System.String,System.Boolean)">
             <summary>
             Invokes the Main.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.RetryCurrentTransaction(System.Collections.Generic.Dictionary{System.String,System.Object},System.Exception,System.Boolean,System.Int32,System.Int32)">
+            <summary>
+            Invokes the Framework/RetryCurrentTransaction.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.RetryCurrentTransaction(System.Collections.Generic.Dictionary{System.String,System.Object},System.Exception,System.Boolean,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Invokes the Framework/RetryCurrentTransaction.xaml
+            </summary>
+            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Invokes the Framework/SetTransactionStatus.xaml
+            </summary>
+        </member>
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.SetTransactionStatus(UiPath.Core.BusinessRuleException,System.String,System.String,System.String,System.Exception,System.Collections.Generic.Dictionary{System.String,System.Object},UiPath.Core.QueueItem,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Invokes the Framework/SetTransactionStatus.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
@@ -59,14 +81,14 @@
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.UpdateAnchorText(System.String,System.String,UiPath.GSuite.Drive.Models.GDriveRemoteItem,System.Data.DataTable)">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses">
             <summary>
-            Invokes the Workflows/UpdateAnchorText.xaml
+            Invokes the Framework/KillAllProcesses.xaml
             </summary>
         </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.UpdateAnchorText(System.String,System.String,UiPath.GSuite.Drive.Models.GDriveRemoteItem,System.Data.DataTable,System.Boolean)">
+        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses(System.Boolean)">
             <summary>
-            Invokes the Workflows/UpdateAnchorText.xaml
+            Invokes the Framework/KillAllProcesses.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>
@@ -89,28 +111,6 @@
         <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.TakeScreenshot(System.String,System.String,System.Boolean)">
             <summary>
             Invokes the Framework/TakeScreenshot.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses">
-            <summary>
-            Invokes the Framework/KillAllProcesses.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.KillAllProcesses(System.Boolean)">
-            <summary>
-            Invokes the Framework/KillAllProcesses.xaml
-            </summary>
-            <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.RetryCurrentTransaction(System.Collections.Generic.Dictionary{System.String,System.Object},System.Exception,System.Boolean,System.Int32,System.Int32)">
-            <summary>
-            Invokes the Framework/RetryCurrentTransaction.xaml
-            </summary>
-        </member>
-        <member name="M:RPA_AutoUpdateAnchor.WorkflowRunnerService.RetryCurrentTransaction(System.Collections.Generic.Dictionary{System.String,System.Object},System.Exception,System.Boolean,System.Int32,System.Int32,System.Boolean)">
-            <summary>
-            Invokes the Framework/RetryCurrentTransaction.xaml
             </summary>
             <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
         </member>

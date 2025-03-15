@@ -124,11 +124,11 @@
       "Path": "Workflows/UpdateAnchorText.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [
-        "strImageUrl&Sequence_56",
-        "strUpdateResult&TryCatch_7",
-        "strDocumentUrl&TryCatch_7",
-        "dictAnchorLinks&Sequence_1",
-        "strFileId&Sequence_1"
+        "dictAnchorLinks&Sequence_56",
+        "strUpdateResult&Sequence_56",
+        "strDocumentUrl&Sequence_56",
+        "strFileId&Sequence_56",
+        "strImageUrl&Sequence_56"
       ],
       "ArgumentsSectionElementsOrder": [
         "in_gdriveFolder",

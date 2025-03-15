@@ -18,6 +18,25 @@ namespace RPA_AutoUpdateAnchor
         }
 
         /// <summary>
+        /// Invokes the Workflows/UpdateAnchorText.xaml
+        /// </summary>
+        public System.Data.DataTable UpdateAnchorText(string in_strGoogleCredential, string in_strInputKey, UiPath.GSuite.Drive.Models.GDriveRemoteItem in_gdriveFolder, System.Data.DataTable io_dt_Generated)
+        {
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Workflows\UpdateAnchorText.xaml", new Dictionary<string, object>{{"in_strGoogleCredential", in_strGoogleCredential}, {"in_strInputKey", in_strInputKey}, {"in_gdriveFolder", in_gdriveFolder}, {"io_dt_Generated", io_dt_Generated}}, default, default, default, GetAssemblyName());
+            return (System.Data.DataTable)result["io_dt_Generated"];
+        }
+
+        /// <summary>
+        /// Invokes the Workflows/UpdateAnchorText.xaml
+        /// </summary>
+		/// <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        public System.Data.DataTable UpdateAnchorText(string in_strGoogleCredential, string in_strInputKey, UiPath.GSuite.Drive.Models.GDriveRemoteItem in_gdriveFolder, System.Data.DataTable io_dt_Generated, System.Boolean isolated)
+        {
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Workflows\UpdateAnchorText.xaml", new Dictionary<string, object>{{"in_strGoogleCredential", in_strGoogleCredential}, {"in_strInputKey", in_strInputKey}, {"in_gdriveFolder", in_gdriveFolder}, {"io_dt_Generated", io_dt_Generated}}, default, isolated, default, GetAssemblyName());
+            return (System.Data.DataTable)result["io_dt_Generated"];
+        }
+
+        /// <summary>
         /// Invokes the Main.xaml
         /// </summary>
         public void Main(string UrlSpreadSheet, int GroupSize, string GoogleCredential)
@@ -73,25 +92,6 @@ namespace RPA_AutoUpdateAnchor
         }
 
         /// <summary>
-        /// Invokes the Workflows/UpdateAnchorText.xaml
-        /// </summary>
-        public System.Data.DataTable UpdateAnchorText(string in_strGoogleCredential, string in_strInputKey, UiPath.GSuite.Drive.Models.GDriveRemoteItem in_gdriveFolder, System.Data.DataTable io_dt_Generated)
-        {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Workflows\UpdateAnchorText.xaml", new Dictionary<string, object>{{"in_strGoogleCredential", in_strGoogleCredential}, {"in_strInputKey", in_strInputKey}, {"in_gdriveFolder", in_gdriveFolder}, {"io_dt_Generated", io_dt_Generated}}, default, default, default, GetAssemblyName());
-            return (System.Data.DataTable)result["io_dt_Generated"];
-        }
-
-        /// <summary>
-        /// Invokes the Workflows/UpdateAnchorText.xaml
-        /// </summary>
-		/// <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        public System.Data.DataTable UpdateAnchorText(string in_strGoogleCredential, string in_strInputKey, UiPath.GSuite.Drive.Models.GDriveRemoteItem in_gdriveFolder, System.Data.DataTable io_dt_Generated, System.Boolean isolated)
-        {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Workflows\UpdateAnchorText.xaml", new Dictionary<string, object>{{"in_strGoogleCredential", in_strGoogleCredential}, {"in_strInputKey", in_strInputKey}, {"in_gdriveFolder", in_gdriveFolder}, {"io_dt_Generated", io_dt_Generated}}, default, isolated, default, GetAssemblyName());
-            return (System.Data.DataTable)result["io_dt_Generated"];
-        }
-
-        /// <summary>
         /// Invokes the Framework/InitAllSettings.xaml
         /// </summary>
         public System.Collections.Generic.Dictionary<string, object> InitAllSettings(string in_ConfigFile, string[] in_ConfigSheets)
@@ -108,25 +108,6 @@ namespace RPA_AutoUpdateAnchor
         {
             var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\InitAllSettings.xaml", new Dictionary<string, object>{{"in_ConfigFile", in_ConfigFile}, {"in_ConfigSheets", in_ConfigSheets}}, default, isolated, default, GetAssemblyName());
             return (System.Collections.Generic.Dictionary<string, object>)result["out_Config"];
-        }
-
-        /// <summary>
-        /// Invokes the Framework/TakeScreenshot.xaml
-        /// </summary>
-        public string TakeScreenshot(string in_Folder, string io_FilePath)
-        {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\TakeScreenshot.xaml", new Dictionary<string, object>{{"in_Folder", in_Folder}, {"io_FilePath", io_FilePath}}, default, default, default, GetAssemblyName());
-            return (string)result["io_FilePath"];
-        }
-
-        /// <summary>
-        /// Invokes the Framework/TakeScreenshot.xaml
-        /// </summary>
-		/// <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        public string TakeScreenshot(string in_Folder, string io_FilePath, System.Boolean isolated)
-        {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\TakeScreenshot.xaml", new Dictionary<string, object>{{"in_Folder", in_Folder}, {"io_FilePath", io_FilePath}}, default, isolated, default, GetAssemblyName());
-            return (string)result["io_FilePath"];
         }
 
         /// <summary>
@@ -166,6 +147,23 @@ namespace RPA_AutoUpdateAnchor
         }
 
         /// <summary>
+        /// Invokes the Framework/KillAllProcesses.xaml
+        /// </summary>
+        public void KillAllProcesses()
+        {
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\KillAllProcesses.xaml", new Dictionary<string, object>{}, default, default, default, GetAssemblyName());
+        }
+
+        /// <summary>
+        /// Invokes the Framework/KillAllProcesses.xaml
+        /// </summary>
+		/// <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
+        public void KillAllProcesses(System.Boolean isolated)
+        {
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\KillAllProcesses.xaml", new Dictionary<string, object>{}, default, isolated, default, GetAssemblyName());
+        }
+
+        /// <summary>
         /// Invokes the Framework/CloseAllApplications.xaml
         /// </summary>
         public void CloseAllApplications()
@@ -183,20 +181,22 @@ namespace RPA_AutoUpdateAnchor
         }
 
         /// <summary>
-        /// Invokes the Framework/KillAllProcesses.xaml
+        /// Invokes the Framework/TakeScreenshot.xaml
         /// </summary>
-        public void KillAllProcesses()
+        public string TakeScreenshot(string in_Folder, string io_FilePath)
         {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\KillAllProcesses.xaml", new Dictionary<string, object>{}, default, default, default, GetAssemblyName());
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\TakeScreenshot.xaml", new Dictionary<string, object>{{"in_Folder", in_Folder}, {"io_FilePath", io_FilePath}}, default, default, default, GetAssemblyName());
+            return (string)result["io_FilePath"];
         }
 
         /// <summary>
-        /// Invokes the Framework/KillAllProcesses.xaml
+        /// Invokes the Framework/TakeScreenshot.xaml
         /// </summary>
 		/// <param name="isolated">Indicates whether to isolate executions (run them within a different process)</param>
-        public void KillAllProcesses(System.Boolean isolated)
+        public string TakeScreenshot(string in_Folder, string io_FilePath, System.Boolean isolated)
         {
-            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\KillAllProcesses.xaml", new Dictionary<string, object>{}, default, isolated, default, GetAssemblyName());
+            var result = _services.WorkflowInvocationService.RunWorkflow(@"Framework\TakeScreenshot.xaml", new Dictionary<string, object>{{"in_Folder", in_Folder}, {"io_FilePath", io_FilePath}}, default, isolated, default, GetAssemblyName());
+            return (string)result["io_FilePath"];
         }
 
         /// <summary>
