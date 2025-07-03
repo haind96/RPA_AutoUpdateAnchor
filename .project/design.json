@@ -1,7 +1,7 @@
 {
   "Tags": [],
   "SeparateRuntimeDependencies": true,
-  "IncludeSources": true,
+  "IncludeSources": false,
   "ConnectorKeys": [
     "uipath-meta-facebook",
     "uipath-openai-openai",

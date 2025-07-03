@@ -63,14 +63,6 @@
       "AddedNamespaces": null
     },
     {
-      "Path": "Sequence.xaml",
-      "SortBy": 0,
-      "VariablesSectionElementsOrder": [],
-      "ArgumentsSectionElementsOrder": [],
-      "ConstantsSectionElementsOrder": [],
-      "AddedNamespaces": null
-    },
-    {
       "Path": "Process.xaml",
       "SortBy": 0,
       "VariablesSectionElementsOrder": [

@@ -76,6 +76,7 @@
       <x:String>System.Threading.Tasks</x:String>
       <x:String>Google.Apis.Drive.v3.Data</x:String>
       <x:String>Google.Apis.Requests</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -167,15 +168,16 @@
       <AssemblyReference>netstandard</AssemblyReference>
       <AssemblyReference>Google.Apis.Drive.v3</AssemblyReference>
       <AssemblyReference>Google.Apis.Core</AssemblyReference>
+      <AssemblyReference>RPA_AutoUpdateAnchor.Core</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="722,2275" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main" sap:VirtualizedContainerService.HintSize="789,4137" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <uga:ForEachSheetConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" Length="{x:Null}" Spreadsheet="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="For Each Sheet in Spreadsheet" sap:VirtualizedContainerService.HintSize="578,2252" sap2010:WorkflowViewState.IdRef="ForEachSheetConnections_2" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" UseConnectionService="True">
+    <uga:ForEachSheetConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" Length="{x:Null}" Spreadsheet="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="For Each Sheet in Spreadsheet" sap:VirtualizedContainerService.HintSize="578,4114" sap2010:WorkflowViewState.IdRef="ForEachSheetConnections_2" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" UseConnectionService="True">
       <uga:ForEachSheetConnections.Body>
         <ActivityAction x:TypeArguments="x:String, x:Int32">
           <ActivityAction.Argument1>
@@ -184,7 +186,7 @@
           <ActivityAction.Argument2>
             <DelegateInArgument x:TypeArguments="x:Int32" Name="CurrentItemIndex" />
           </ActivityAction.Argument2>
-          <Sequence DisplayName="generated_texts" sap:VirtualizedContainerService.HintSize="576,2069" sap2010:WorkflowViewState.IdRef="Sequence_12">
+          <Sequence DisplayName="generated_texts" sap:VirtualizedContainerService.HintSize="576,3931" sap2010:WorkflowViewState.IdRef="Sequence_12">
             <Sequence.Variables>
               <Variable x:TypeArguments="sd:DataTable4" Name="dt_GetContents" />
               <Variable x:TypeArguments="ugdm:GDriveRemoteItem" Name="gdriveFolder" />
@@ -194,9 +196,9 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <TryCatch DisplayName="tc_gen_text_ai" sap:VirtualizedContainerService.HintSize="542,2009" sap2010:WorkflowViewState.IdRef="TryCatch_5">
+            <TryCatch DisplayName="tc_gen_text_ai" sap:VirtualizedContainerService.HintSize="542,3871" sap2010:WorkflowViewState.IdRef="TryCatch_5">
               <TryCatch.Try>
-                <Sequence DisplayName="try_gen_text_ai" sap:VirtualizedContainerService.HintSize="540,1711" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                <Sequence DisplayName="try_gen_text_ai" sap:VirtualizedContainerService.HintSize="540,3573" sap2010:WorkflowViewState.IdRef="Sequence_21">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -234,7 +236,7 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </uga:ReadRangeConnections>
-                  <If Condition="[dt_GetContents.RowCount &gt; 0]" DisplayName="If GetContents RowCount &gt; 0" sap:VirtualizedContainerService.HintSize="506,1594" sap2010:WorkflowViewState.IdRef="If_3">
+                  <If Condition="[dt_GetContents.RowCount &gt; 0]" DisplayName="If GetContents RowCount &gt; 0" sap:VirtualizedContainerService.HintSize="506,3456" sap2010:WorkflowViewState.IdRef="If_3">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -242,16 +244,42 @@
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                     <If.Then>
-                      <Sequence DisplayName="Have Data Get Contents" sap:VirtualizedContainerService.HintSize="504,1376" sap2010:WorkflowViewState.IdRef="Sequence_24">
+                      <Sequence DisplayName="Have Data Get Contents" sap:VirtualizedContainerService.HintSize="504,3238" sap2010:WorkflowViewState.IdRef="Sequence_24">
                         <Sequence.Variables>
                           <Variable x:TypeArguments="x:String" Name="strInputKey" />
                           <Variable x:TypeArguments="x:String" Name="strUrlFolderDrive" />
+                          <Variable x:TypeArguments="x:Int32" Name="CurrentIndex" />
                         </Sequence.Variables>
                         <sap:WorkflowViewStateService.ViewState>
                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                           </scg:Dictionary>
                         </sap:WorkflowViewStateService.ViewState>
+                        <ui:AddDataColumn x:TypeArguments="x:Int32" AllowDBNull="{x:Null}" AutoIncrement="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" ColumnName="STT" DataTable="[dt_GetContents]" DisplayName="Add Data Column STT" sap:VirtualizedContainerService.HintSize="470,218" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_2" />
+                        <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="[CurrentIndex]" DataTable="[dt_GetContents]" DisplayName="fer_dt_GetContents" sap:VirtualizedContainerService.HintSize="470,345" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+                          <ui:ForEachRow.Body>
+                            <ActivityAction x:TypeArguments="sd1:DataRow">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="sd1:DataRow" Name="CurrentRow" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="468,165" sap2010:WorkflowViewState.IdRef="Sequence_76">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign DisplayName="Assign CurrentRow(&quot;STT&quot;)" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_22">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:Object">[CurrentRow("STT")]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:Object">[CurrentIndex+1]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEachRow.Body>
+                        </ui:ForEachRow>
                         <Assign DisplayName="Assign InputKey" sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_19">
                           <Assign.To>
                             <OutArgument x:TypeArguments="x:String">[strInputKey]</OutArgument>
@@ -575,7 +603,7 @@
                             </Sequence>
                           </TryCatch.Finally>
                         </TryCatch>
-                        <If Condition="[dt_GetContents.RowCount &gt; GroupSize]" DisplayName="If TableGetContents &gt; GroupSize" sap:VirtualizedContainerService.HintSize="470,1145" sap2010:WorkflowViewState.IdRef="If_4">
+                        <If Condition="[dt_GetContents.RowCount &gt; GroupSize]" DisplayName="If TableGetContents &gt; GroupSize" sap:VirtualizedContainerService.HintSize="470,2444" sap2010:WorkflowViewState.IdRef="If_4">
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -583,7 +611,7 @@
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
                           <If.Then>
-                            <Sequence DisplayName="Group Datatable" sap:VirtualizedContainerService.HintSize="468,590" sap2010:WorkflowViewState.IdRef="Sequence_26">
+                            <Sequence DisplayName="Group Datatable" sap:VirtualizedContainerService.HintSize="468,1253" sap2010:WorkflowViewState.IdRef="Sequence_26">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="scg:List(sd1:DataTable)" Name="listSubTables" />
                                 <Variable x:TypeArguments="sd1:DataTable" Name="dt_CloneContents" />
@@ -629,13 +657,13 @@
                                     <ActivityAction.Argument>
                                       <DelegateInArgument x:TypeArguments="sd1:DataTable" Name="currentDataTable" />
                                     </ActivityAction.Argument>
-                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="502,896" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                                    <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,285" sap2010:WorkflowViewState.IdRef="Sequence_33">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                         </scg:Dictionary>
                                       </sap:WorkflowViewStateService.ViewState>
-                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateAnchorText - Invoke Workflow File (Workflows\UpdateAnchorText.xaml)" sap:VirtualizedContainerService.HintSize="468,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\UpdateAnchorText.xaml">
+                                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateAnchorText - Invoke Workflow File (Workflows\UpdateAnchorText.xaml)" sap:VirtualizedContainerService.HintSize="382,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Workflows\UpdateAnchorText.xaml">
                                         <ui:InvokeWorkflowFile.Arguments>
                                           <InArgument x:TypeArguments="x:String" x:Key="in_strGoogleCredential">[GoogleCredential]</InArgument>
                                           <InArgument x:TypeArguments="x:String" x:Key="in_strInputKey">[strInputKey]</InArgument>
@@ -643,10 +671,10 @@
                                           <InArgument x:TypeArguments="ugdm:GDriveRemoteItem" x:Key="in_gdriveFolder">[gdriveFolder]</InArgument>
                                         </ui:InvokeWorkflowFile.Arguments>
                                       </ui:InvokeWorkflowFile>
-                                      <ParallelForEach x:TypeArguments="sd1:DataRow" DisplayName="Parallel For Each currentDataTable" sap:VirtualizedContainerService.HintSize="468,632" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_3" Values="[currentDataTable.AsEnumerable]">
+                                      <ParallelForEach x:TypeArguments="sd1:DataRow" DisplayName="Parallel For Each currentDataTable" sap:VirtualizedContainerService.HintSize="382,48" sap2010:WorkflowViewState.IdRef="ParallelForEach`1_3" Values="[currentDataTable.AsEnumerable]">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                            <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                                             <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
@@ -715,7 +743,9 @@
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
                               </ui:ForEach>
-                              <uga:WriteRangeConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" Spreadsheet="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="Write Range Sheet" sap:VirtualizedContainerService.HintSize="434,48" sap2010:WorkflowViewState.IdRef="WriteRangeConnections_3" IncludeHeaders="True" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" Range="[CurrentItem]" RowPosition="0" Source="[dt_CloneContents]" UseConnectionService="True" WorkingWithTemplateSpreadsheet="False" WriteMode="Overwrite">
+                              <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="STT" DataTable="[dt_CloneContents]" DisplayName="sort_dt_CopyContents_stt_asc" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="SortDataTable_2" Order="Ascending" OutputDataTable="[dt_CloneContents]" SortOrder="Ascending" />
+                              <ui:RemoveDataColumn Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="STT" DataTable="[dt_CloneContents]" DisplayName="Remove Data Column STT" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="RemoveDataColumn_2" />
+                              <uga:WriteRangeConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" Spreadsheet="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="Write Range Sheet" sap:VirtualizedContainerService.HintSize="434,381" sap2010:WorkflowViewState.IdRef="WriteRangeConnections_3" IncludeHeaders="True" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" Range="[CurrentItem]" RowPosition="0" Source="[dt_CloneContents]" UseConnectionService="True" WorkingWithTemplateSpreadsheet="False" WriteMode="Overwrite">
                                 <uga:WriteRangeConnections.FileIdBackup>
                                   <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID3" StoredValue="UrlOrId">
                                     <usau:BackupSlot.BackupValues>
@@ -747,7 +777,7 @@
                                 </uga:WriteRangeConnections.RangeWriteModeBackup>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
@@ -755,7 +785,7 @@
                             </Sequence>
                           </If.Then>
                           <If.Else>
-                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,426" sap2010:WorkflowViewState.IdRef="Sequence_27">
+                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="468,1062" sap2010:WorkflowViewState.IdRef="Sequence_27">
                               <Sequence.Variables>
                                 <Variable x:TypeArguments="sd1:DataTable" Name="dt_CopyContents" />
                               </Sequence.Variables>
@@ -773,7 +803,7 @@
                                   <InArgument x:TypeArguments="sd1:DataTable">[dt_GetContents.Copy]</InArgument>
                                 </Assign.Value>
                               </Assign>
-                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateAnchorText - Invoke Workflow File (Workflows\UpdateAnchorText.xaml)" sap:VirtualizedContainerService.HintSize="434,204" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows\UpdateAnchorText.xaml">
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateAnchorText - Invoke Workflow File (Workflows\UpdateAnchorText.xaml)" sap:VirtualizedContainerService.HintSize="434,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_6" UnSafe="False" WorkflowFileName="Workflows\UpdateAnchorText.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
                                   <InArgument x:TypeArguments="x:String" x:Key="in_strGoogleCredential">[GoogleCredential]</InArgument>
                                   <InArgument x:TypeArguments="x:String" x:Key="in_strInputKey">[strInputKey]</InArgument>
@@ -781,7 +811,9 @@
                                   <InArgument x:TypeArguments="ugdm:GDriveRemoteItem" x:Key="in_gdriveFolder">[gdriveFolder]</InArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
-                              <uga:WriteRangeConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" Spreadsheet="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="Write Range Sheet" sap:VirtualizedContainerService.HintSize="434,48" sap2010:WorkflowViewState.IdRef="WriteRangeConnections_2" IncludeHeaders="True" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" Range="[CurrentItem]" RowPosition="0" Source="[dt_CopyContents]" UseConnectionService="True" WorkingWithTemplateSpreadsheet="False" WriteMode="Overwrite">
+                              <ui:SortDataTable ColumnIndex="{x:Null}" DataColumn="{x:Null}" ColumnName="STT" DataTable="[dt_CopyContents]" DisplayName="sort_dt_CopyContents_stt_asc" sap:VirtualizedContainerService.HintSize="434,112" sap2010:WorkflowViewState.IdRef="SortDataTable_1" Order="Ascending" OutputDataTable="[dt_CopyContents]" SortOrder="Ascending" />
+                              <ui:RemoveDataColumn Column="{x:Null}" ColumnIndex="{x:Null}" ColumnName="STT" DataTable="[dt_CopyContents]" DisplayName="Remove Data Column STT" sap:VirtualizedContainerService.HintSize="434,218" sap2010:WorkflowViewState.IdRef="RemoveDataColumn_1" />
+                              <uga:WriteRangeConnections BrowserItemFriendlyName="{x:Null}" BrowserItemId="{x:Null}" ConnectionAccountName="{x:Null}" ContinueOnError="{x:Null}" Spreadsheet="{x:Null}" TemplateBrowserItemFriendlyName="{x:Null}" TemplateBrowserItemId="{x:Null}" AuthScopesInvalid="False" ConnectionId="f215dd52-8fe8-429f-bd09-bbaeb01166f9" DisplayName="Write Range Sheet" sap:VirtualizedContainerService.HintSize="434,381" sap2010:WorkflowViewState.IdRef="WriteRangeConnections_2" IncludeHeaders="True" ItemSelectionMode="UrlOrId" ManualEntrySpreadsheetId="[UrlSpreadSheet]" Range="[CurrentItem]" RowPosition="0" Source="[dt_CopyContents]" UseConnectionService="True" WorkingWithTemplateSpreadsheet="False" WriteMode="Overwrite">
                                 <uga:WriteRangeConnections.FileIdBackup>
                                   <usau:BackupSlot x:TypeArguments="ugade:EDriveItemMode" x:Name="__ReferenceID4" StoredValue="UrlOrId">
                                     <usau:BackupSlot.BackupValues>
@@ -813,7 +845,7 @@
                                 </uga:WriteRangeConnections.RangeWriteModeBackup>
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     <x:Boolean x:Key="IsPinned">False</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
