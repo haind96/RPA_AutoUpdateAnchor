@@ -22,13 +22,7 @@ namespace RPA_AutoUpdateAnchor
         private Lazy<ConnectionsManager> _connectionsManagerLazy;
         public CodedWorkflow()
         {
-            _ = new System.Type[]
-            {
-                typeof(UiPath.Core.Activities.API.ISystemService),
-                typeof(UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService),
-                typeof(UiPath.GSuite.Activities.Api.IGoogleConnectionsService),
-                typeof(UiPath.Excel.Activities.API.IExcelService)
-            };
+            _ = new System.Type[]{typeof(UiPath.Excel.Activities.API.IExcelService), typeof(UiPath.GSuite.Activities.Api.IGoogleConnectionsService), typeof(UiPath.Core.Activities.API.ISystemService), typeof(UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService)};
             _workflowRunnerServiceLazy = new Lazy<global::RPA_AutoUpdateAnchor.WorkflowRunnerService>(() => new global::RPA_AutoUpdateAnchor.WorkflowRunnerService(this.services));
 #pragma warning disable
             _connectionsManagerLazy = new Lazy<ConnectionsManager>(() => new ConnectionsManager(serviceContainer));
@@ -40,12 +34,15 @@ namespace RPA_AutoUpdateAnchor
 #pragma warning disable
         protected UiPath.Excel.Activities.API.IExcelService excel { get => serviceContainer.Resolve<UiPath.Excel.Activities.API.IExcelService>() ; }
 #pragma warning restore
+
 #pragma warning disable
         protected UiPath.GSuite.Activities.Api.IGoogleConnectionsService google { get => serviceContainer.Resolve<UiPath.GSuite.Activities.Api.IGoogleConnectionsService>() ; }
 #pragma warning restore
+
 #pragma warning disable
         protected UiPath.Core.Activities.API.ISystemService system { get => serviceContainer.Resolve<UiPath.Core.Activities.API.ISystemService>() ; }
 #pragma warning restore
+
 #pragma warning disable
         protected UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService uiAutomation { get => serviceContainer.Resolve<UiPath.UIAutomationNext.API.Contracts.IUiAutomationAppService>() ; }
 #pragma warning restore

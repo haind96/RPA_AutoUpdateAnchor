@@ -11,143 +11,119 @@ namespace RPA_AutoUpdateAnchor
     public class InsertAnchor
     {
         public static string InsertAnchorsAndOptionalImage(
-        string inputKey,
-        string credentialsPath,
-        string fileId,
-        Dictionary<string, string> anchorLinks,
-        bool insertLastWithSeeMore = false,
-        bool insertAllIncludingLast = false,
-        string imageUrl = null)
+            string inputKey,
+            string credentialsPath,
+            string fileId,
+            Dictionary<string, string> anchorLinks,
+            bool insertLastWithSeeMore = false,
+            bool insertAllIncludingLast = false,
+            string imageUrl = null)
         {
             try
             {
-                var docsService = InitDocsService(credentialsPath);
-                var doc = docsService.Documents.Get(fileId).Execute();
+                var service = InitDocsService(credentialsPath);
+                var doc = service.Documents.Get(fileId).Execute();
+                var content = doc.Body.Content;
+
                 var requests = new List<Request>();
                 var inserted = new HashSet<string>();
-                var remaining = new Dictionary<string, string>(anchorLinks);
-                var lastAnchor = remaining.Keys.LastOrDefault();
-                int offset = 0, pIndex = 0;
-                bool skipEven = false;
+                //                var remaining = new Dictionary<string, string>(anchorLinks);
+                //                var lastAnchor = remaining.Keys.LastOrDefault();
+                var lastAnchor = anchorLinks.Keys.LastOrDefault();
+                var remaining = anchorLinks
+                    .Where(kv => insertAllIncludingLast || kv.Key != lastAnchor)
+                    .ToDictionary(kv => kv.Key, kv => kv.Value);
+                int offset = 0, paragraphIndex = 0;
 
-                foreach (var el in doc.Body.Content)
+                for (int i = 0; i < content.Count && remaining.Count > 0; i++)
                 {
+                    var el = content[i];
                     if (el.Paragraph == null || IsHeading(el.Paragraph.ParagraphStyle)) continue;
-                    pIndex++;
-                    if (!skipEven && pIndex % 2 == 0) continue;
-                    skipEven = false;
 
-                    string text = "";
-                    int start = -1, end = -1;
-                    foreach (var run in el.Paragraph.Elements)
+                    paragraphIndex++;
+                    bool isOdd = paragraphIndex % 2 == 1;
+
+                    string text = GetText(el);
+                    int start = GetStartIndex(el) + offset;
+                    int end = GetEndIndex(el) + offset;
+
+                    bool hasKey = text.ToLower().Contains(inputKey.ToLower());
+
+                    // Nếu đoạn lẻ không có key, xét đoạn tiếp theo
+                    if (!hasKey && isOdd && i + 1 < content.Count)
                     {
-                        if (run.TextRun != null)
+                        var next = content[i + 1];
+                        if (next.Paragraph != null && !IsHeading(next.Paragraph.ParagraphStyle))
                         {
-                            text += run.TextRun.Content;
-                            if (start == -1) start = (run.StartIndex ?? 0) + offset;
-                            end = (run.StartIndex ?? 0) + run.TextRun.Content.Length + offset;
+                            string nextText = GetText(next);
+                            if (nextText.ToLower().Contains(inputKey.ToLower()))
+                            {
+                                el = next;
+                                text = nextText;
+                                i++; paragraphIndex++;
+                                start = GetStartIndex(el) + offset;
+                                end = GetEndIndex(el) + offset;
+                                hasKey = true;
+                            }
                         }
                     }
 
-                    if (!text.ToLower().Contains(inputKey.ToLower()))
-                    {
-                        skipEven = true;
-                        continue;
-                    }
+                    if (!hasKey) continue;
 
-                    foreach (var a in new Dictionary<string, string>(remaining))
-                    {
-                        // Nếu không chèn anchor cuối, bỏ qua nó
-                        if (!insertAllIncludingLast && a.Key == lastAnchor) continue;
-                        if (inserted.Contains(a.Key)) continue;
+                    var currentAnchor = remaining.FirstOrDefault();
+                    if (string.IsNullOrEmpty(currentAnchor.Key)) break;
 
-                        int match = text.ToLower().IndexOf(inputKey.ToLower());
-                        if (match != -1)
-                        {
-                            InsertAnchorRequests(requests, inputKey, a.Key, a.Value, start + match);
-                            inserted.Add(a.Key);
-                            remaining.Remove(a.Key);
-                            offset += a.Key.Length - inputKey.Length;
-                            break;
-                        }
-                    }
-
-                    if (remaining.Count == 1 && remaining.ContainsKey(lastAnchor) && insertLastWithSeeMore)
+                    // Anchor cuối - Xem thêm
+                    if (currentAnchor.Key == lastAnchor && insertLastWithSeeMore && remaining.Count == 1)
                     {
-                        InsertSeeMoreBlock(requests, lastAnchor, remaining[lastAnchor], end);
+                        InsertSeeMoreFormatted(requests, end, lastAnchor, currentAnchor.Value);
                         remaining.Remove(lastAnchor);
                         break;
                     }
-
-                    if (remaining.Count == 0) break;
-                }
-
-                // Nếu vẫn còn anchor và không dùng “Xem thêm” → chèn plain cuối
-                if (remaining.Count > 0 && !insertLastWithSeeMore)
-                {
-                    int insertIndex = -1;
-
-                    // Tìm đoạn cuối không phải Heading
-                    for (int i = doc.Body.Content.Count - 1; i >= 0; i--)
+                    else
                     {
-                        var content = doc.Body.Content[i];
-                        if (content.Paragraph != null &&
-                            !IsHeading(content.Paragraph.ParagraphStyle) &&
-                            content.EndIndex.HasValue)
+                        int matchIndex = text.ToLower().IndexOf(inputKey.ToLower());
+                        if (matchIndex >= 0)
                         {
-                            insertIndex = content.EndIndex.Value - 1; // Tránh index vượt giới hạn
-                            break;
+                            InsertAnchorRequests(requests, inputKey, currentAnchor.Key, currentAnchor.Value, start + matchIndex);
+                            inserted.Add(currentAnchor.Key);
+                            remaining.Remove(currentAnchor.Key);
+                            offset += currentAnchor.Key.Length - inputKey.Length;
                         }
                     }
+                }
 
-                    if (insertIndex == -1)
-                        insertIndex = doc.Body.Content.LastOrDefault()?.EndIndex ?? 1;
+                // Fallback: chèn cuối nếu còn anchor
+                if (remaining.Count > 0)
+                {
+                    int insertIndex = GetDocumentEndIndex(content);
 
-                    foreach (var anchor in remaining)
+                    if (remaining.Count == 1 && insertLastWithSeeMore)
                     {
-                        string textToInsert = anchor.Key + "\n";
-
-                        requests.Add(new Request
+                        var anchor = remaining.First();
+                        InsertSeeMoreFormatted(requests, insertIndex, anchor.Key, anchor.Value);
+                    }
+                    else
+                    {
+                        foreach (var anchor in remaining)
                         {
-                            InsertText = new InsertTextRequest
-                            {
-                                Text = textToInsert,
-                                Location = new Location { Index = insertIndex }
-                            }
-                        });
-
-                        requests.Add(new Request
-                        {
-                            UpdateTextStyle = new UpdateTextStyleRequest
-                            {
-                                Range = new Google.Apis.Docs.v1.Data.Range
-                                {
-                                    StartIndex = insertIndex,
-                                    EndIndex = insertIndex + anchor.Key.Length
-                                },
-                                TextStyle = new TextStyle { Link = new Link { Url = anchor.Value } },
-                                Fields = "link"
-                            }
-                        });
-
-                        insertIndex += textToInsert.Length;
+                            InsertPlainAnchor(requests, insertIndex, anchor.Key, anchor.Value);
+                            insertIndex += anchor.Key.Length + 1;
+                        }
                     }
                 }
 
-                // Chèn hình nếu có (tổi đa 3 ảnh)
+                // Chèn hình nếu có
                 if (!string.IsNullOrEmpty(imageUrl))
                 {
-                    var imageUrls = imageUrl.Split(';')
-                           .Select(s => s.Trim())
-                           .Where(s => !string.IsNullOrEmpty(s))
-                           .Take(3)  // Lấy tối đa 3 ảnh
-                           .ToList();
+                    var imageUrls = imageUrl.Split(';').Select(s => s.Trim()).Where(s => !string.IsNullOrEmpty(s)).Take(3).ToList();
                     if (imageUrls.Count > 0)
-                        InsertImagesAtParagraphs(requests, doc.Body.Content, imageUrls);
+                        InsertImagesAfterHeading2(requests, content, imageUrls);
                 }
+
                 if (requests.Any())
                 {
-                    docsService.Documents.BatchUpdate(new BatchUpdateDocumentRequest { Requests = requests }, fileId).Execute();
+                    service.Documents.BatchUpdate(new BatchUpdateDocumentRequest { Requests = requests }, fileId).Execute();
                     return "Thành công";
                 }
                 return "Thất bại do không có request nào cập nhật";
@@ -156,6 +132,118 @@ namespace RPA_AutoUpdateAnchor
             {
                 return "Thất bại: " + ex.Message;
             }
+        }
+
+        private static string GetText(StructuralElement el) =>
+            string.Join("", el.Paragraph.Elements.Where(e => e.TextRun != null).Select(e => e.TextRun.Content));
+
+        private static int GetStartIndex(StructuralElement el) =>
+            el.Paragraph.Elements.FirstOrDefault(e => e.TextRun != null)?.StartIndex ?? 0;
+
+        private static int GetEndIndex(StructuralElement el) =>
+            el.Paragraph.Elements.LastOrDefault(e => e.TextRun != null) is var last && last != null
+                ? (last.StartIndex ?? 0) + last.TextRun.Content.Length
+                : 0;
+
+        private static int GetDocumentEndIndex(IList<StructuralElement> content)
+        {
+            for (int i = content.Count - 1; i >= 0; i--)
+            {
+                var el = content[i];
+                if (el.Paragraph != null && !IsHeading(el.Paragraph.ParagraphStyle) && el.EndIndex.HasValue)
+                    return el.EndIndex.Value - 1;
+            }
+            return content.LastOrDefault()?.EndIndex ?? 1;
+        }
+
+        private static void InsertPlainAnchor(List<Request> requests, int index, string text, string url)
+        {
+            requests.Add(new Request
+            {
+                InsertText = new InsertTextRequest
+                {
+                    Text = text + "\n",
+                    Location = new Location { Index = index }
+                }
+            });
+
+            requests.Add(new Request
+            {
+                UpdateTextStyle = new UpdateTextStyleRequest
+                {
+                    Range = new Google.Apis.Docs.v1.Data.Range
+                    {
+                        StartIndex = index,
+                        EndIndex = index + text.Length
+                    },
+                    TextStyle = new TextStyle { Link = new Link { Url = url } },
+                    Fields = "link"
+                }
+            });
+        }
+
+        private static void InsertSeeMoreFormatted(List<Request> requests, int insertAt, string anchorText, string anchorUrl)
+        {
+            string boldText = "Xem thêm: ";
+            string fullText = boldText + anchorText + "\n";
+
+            // 1. Chèn văn bản đầy đủ vào cuối đoạn
+            requests.Add(new Request
+            {
+                InsertText = new InsertTextRequest
+                {
+                    Text = fullText,
+                    Location = new Location { Index = insertAt }
+                }
+            });
+
+            // 2. Ép đoạn văn này về NORMAL_TEXT
+            requests.Add(new Request
+            {
+                UpdateParagraphStyle = new UpdateParagraphStyleRequest
+                {
+                    Range = new Google.Apis.Docs.v1.Data.Range
+                    {
+                        StartIndex = insertAt,
+                        EndIndex = insertAt + fullText.Length
+                    },
+                    ParagraphStyle = new ParagraphStyle
+                    {
+                        NamedStyleType = "NORMAL_TEXT"
+                    },
+                    Fields = "namedStyleType"
+                }
+            });
+
+            // 3. Bôi đậm "Xem thêm: "
+            requests.Add(new Request
+            {
+                UpdateTextStyle = new UpdateTextStyleRequest
+                {
+                    Range = new Google.Apis.Docs.v1.Data.Range
+                    {
+                        StartIndex = insertAt,
+                        EndIndex = insertAt + boldText.Length
+                    },
+                    TextStyle = new TextStyle { Bold = true },
+                    Fields = "bold"
+                }
+            });
+
+            // 4. Gắn link cho phần anchor
+            requests.Add(new Request
+            {
+                UpdateTextStyle = new UpdateTextStyleRequest
+                {
+                    Range = new Google.Apis.Docs.v1.Data.Range
+                    {
+                        StartIndex = insertAt + boldText.Length,
+                        EndIndex = insertAt + boldText.Length + anchorText.Length
+                    },
+                    TextStyle = new TextStyle { Link = new Link { Url = anchorUrl } },
+                    Fields = "link"
+                }
+            });
         }
 
         private static DocsService InitDocsService(string credentialsPath)
@@ -214,66 +302,50 @@ namespace RPA_AutoUpdateAnchor
             });
         }
 
-        private static void InsertSeeMoreBlock(List<Request> requests, string anchorText, string anchorUrl, int insertIndex)
+        private static void InsertImagesAfterHeading2(List<Request> requests, IList<StructuralElement> content, List<string> imageUrls)
         {
-            const string prefix = "Xem thêm: ";
-            int xemThemLength = prefix.Length;
+            int imageIndex = 0;
 
-            requests.Add(new Request
+            for (int i = 0; i < content.Count && imageIndex < imageUrls.Count; i++)
             {
-                InsertText = new InsertTextRequest
-                {
-                    Text = prefix,
-                    Location = new Location { Index = insertIndex }
-                }
-            });
+                var element = content[i];
 
-            requests.Add(new Request
-            {
-                UpdateParagraphStyle = new UpdateParagraphStyleRequest
+                // Tìm đoạn Heading 2
+                if (element.Paragraph?.ParagraphStyle?.NamedStyleType == "HEADING_2")
                 {
-                    Range = new Google.Apis.Docs.v1.Data.Range
+                    int? insertIndex = GetNextParagraphStartIndex(content, i);
+
+                    if (insertIndex.HasValue)
                     {
-                        StartIndex = insertIndex,
-                        EndIndex = insertIndex + xemThemLength + anchorText.Length + 1
-                    },
-                    ParagraphStyle = new ParagraphStyle { NamedStyleType = "NORMAL_TEXT" },
-                    Fields = "namedStyleType"
-                }
-            });
+                        requests.Add(new Request
+                        {
+                            InsertInlineImage = new InsertInlineImageRequest
+                            {
+                                Location = new Location { Index = insertIndex.Value },
+                                Uri = imageUrls[imageIndex],
+                                ObjectSize = new Size
+                                {
+                                    Width = new Dimension { Magnitude = 480, Unit = "PT" },
+                                    Height = new Dimension { Magnitude = 320, Unit = "PT" }
+                                }
+                            }
+                        });
 
-            requests.Add(new Request
-            {
-                UpdateTextStyle = new UpdateTextStyleRequest
-                {
-                    Range = new Google.Apis.Docs.v1.Data.Range { StartIndex = insertIndex, EndIndex = insertIndex + 9 },
-                    TextStyle = new TextStyle { Bold = true },
-                    Fields = "bold"
+                        imageIndex++;
+                    }
                 }
-            });
+            }
+        }
 
-            requests.Add(new Request
+        private static int? GetNextParagraphStartIndex(IList<StructuralElement> content, int currentIndex)
+        {
+            for (int j = currentIndex + 1; j < content.Count; j++)
             {
-                InsertText = new InsertTextRequest
-                {
-                    Text = anchorText + "\n",
-                    Location = new Location { Index = insertIndex + xemThemLength }
-                }
-            });
+                if (content[j].Paragraph != null)
+                    return content[j].StartIndex;
+            }
 
-            requests.Add(new Request
-            {
-                UpdateTextStyle = new UpdateTextStyleRequest
-                {
-                    Range = new Google.Apis.Docs.v1.Data.Range
-                    {
-                        StartIndex = insertIndex + xemThemLength,
-                        EndIndex = insertIndex + xemThemLength + anchorText.Length
-                    },
-                    TextStyle = new TextStyle { Link = new Link { Url = anchorUrl } },
-                    Fields = "link"
-                }
-            });
+            return null;
         }
 
         private static void InsertImagesAtParagraphs(List<Request> requests, IList<StructuralElement> content, List<string> imageUrls)
@@ -317,6 +389,5 @@ namespace RPA_AutoUpdateAnchor
                 }
             }
         }
-
     }
 }

@@ -6,6 +6,7 @@ namespace RPA_AutoUpdateAnchor
     public class GoogleDocsFactory
     {
         public UiPath.GSuite.Activities.Api.DocsConnection My_Workspace_nguyendinhhai196_gmail_com__2 { get; set; }
+
         public UiPath.GSuite.Activities.Api.DocsConnection My_Workspace_haiiicoo1996_gmail_com__2 { get; set; }
 
         public GoogleDocsFactory(ICodedWorkflowsServiceContainer resolver)
@@ -18,7 +19,9 @@ namespace RPA_AutoUpdateAnchor
     public class DriveFactory
     {
         public UiPath.GSuite.Activities.Api.DriveConnection My_Workspace_nguyendinhhai196_gmail_com__2 { get; set; }
+
         public UiPath.GSuite.Activities.Api.DriveConnection My_Workspace_haiiicoo1996_gmail_com__2 { get; set; }
+
         public UiPath.GSuite.Activities.Api.DriveConnection My_Workspace_haiiicoo1996_gmail_com__3 { get; set; }
 
         public DriveFactory(ICodedWorkflowsServiceContainer resolver)
@@ -42,6 +45,7 @@ namespace RPA_AutoUpdateAnchor
     public class GoogleSheetsFactory
     {
         public UiPath.GSuite.Activities.Api.SheetsConnection My_Workspace_nguyendinhhai196_gmail_com__2 { get; set; }
+
         public UiPath.GSuite.Activities.Api.SheetsConnection My_Workspace_haiiicoo1996_gmail_com__2 { get; set; }
 
         public GoogleSheetsFactory(ICodedWorkflowsServiceContainer resolver)
