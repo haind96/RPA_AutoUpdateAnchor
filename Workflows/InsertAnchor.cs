@@ -27,8 +27,6 @@ namespace RPA_AutoUpdateAnchor
 
                 var requests = new List<Request>();
                 var inserted = new HashSet<string>();
-                //                var remaining = new Dictionary<string, string>(anchorLinks);
-                //                var lastAnchor = remaining.Keys.LastOrDefault();
                 var lastAnchor = anchorLinks.Keys.LastOrDefault();
                 var remaining = anchorLinks
                     .Where(kv => insertAllIncludingLast || kv.Key != lastAnchor)
@@ -121,8 +119,10 @@ namespace RPA_AutoUpdateAnchor
                         InsertImagesAfterHeading2(requests, content, imageUrls);
                 }
 
+
                 if (requests.Any())
                 {
+                    requests = requests.Where(r => r != null).ToList();
                     service.Documents.BatchUpdate(new BatchUpdateDocumentRequest { Requests = requests }, fileId).Execute();
                     return "Thành công";
                 }
@@ -305,36 +305,63 @@ namespace RPA_AutoUpdateAnchor
         private static void InsertImagesAfterHeading2(List<Request> requests, IList<StructuralElement> content, List<string> imageUrls)
         {
             int imageIndex = 0;
+            var usedIndexes = new HashSet<int>();
 
+            // Ưu tiên chèn sau HEADING_2
             for (int i = 0; i < content.Count && imageIndex < imageUrls.Count; i++)
             {
                 var element = content[i];
-
-                // Tìm đoạn Heading 2
                 if (element.Paragraph?.ParagraphStyle?.NamedStyleType == "HEADING_2")
                 {
                     int? insertIndex = GetNextParagraphStartIndex(content, i);
-
-                    if (insertIndex.HasValue)
+                    if (insertIndex.HasValue && !usedIndexes.Contains(insertIndex.Value))
                     {
-                        requests.Add(new Request
-                        {
-                            InsertInlineImage = new InsertInlineImageRequest
-                            {
-                                Location = new Location { Index = insertIndex.Value },
-                                Uri = imageUrls[imageIndex],
-                                ObjectSize = new Size
-                                {
-                                    Width = new Dimension { Magnitude = 480, Unit = "PT" },
-                                    Height = new Dimension { Magnitude = 320, Unit = "PT" }
-                                }
-                            }
-                        });
-
+                        AddImageRequest(requests, insertIndex.Value, imageUrls[imageIndex]);
+                        Console.WriteLine($"Chèn ảnh sau HEADING_2: {imageUrls[imageIndex]}");
+                        usedIndexes.Add(insertIndex.Value);
                         imageIndex++;
                     }
                 }
             }
+
+            // Nếu còn ảnh thì chèn sau HEADING_3
+            for (int i = 0; i < content.Count && imageIndex < imageUrls.Count; i++)
+            {
+                var element = content[i];
+                if (element.Paragraph?.ParagraphStyle?.NamedStyleType == "HEADING_3")
+                {
+                    int? insertIndex = GetNextParagraphStartIndex(content, i);
+                    if (insertIndex.HasValue && !usedIndexes.Contains(insertIndex.Value))
+                    {
+                        AddImageRequest(requests, insertIndex.Value, imageUrls[imageIndex]);
+                        Console.WriteLine($"Chèn ảnh sau HEADING_3: {imageUrls[imageIndex]}");
+                        usedIndexes.Add(insertIndex.Value);
+                        imageIndex++;
+                    }
+                }
+            }
+
+            if (imageIndex < imageUrls.Count)
+            {
+                Console.WriteLine($"Còn {imageUrls.Count - imageIndex} ảnh chưa chèn do thiếu Heading 2/3.");
+            }
+        }
+
+        private static void AddImageRequest(List<Request> requests, int insertIndex, string imageUrl)
+        {
+            requests.Add(new Request
+            {
+                InsertInlineImage = new InsertInlineImageRequest
+                {
+                    Location = new Location { Index = insertIndex },
+                    Uri = imageUrl,
+                    ObjectSize = new Size
+                    {
+                        Width = new Dimension { Magnitude = 480, Unit = "PT" },
+                        Height = new Dimension { Magnitude = 320, Unit = "PT" }
+                    }
+                }
+            });
         }
 
         private static int? GetNextParagraphStartIndex(IList<StructuralElement> content, int currentIndex)
@@ -344,9 +371,9 @@ namespace RPA_AutoUpdateAnchor
                 if (content[j].Paragraph != null)
                     return content[j].StartIndex;
             }
-
             return null;
         }
+
 
         private static void InsertImagesAtParagraphs(List<Request> requests, IList<StructuralElement> content, List<string> imageUrls)
         {
@@ -389,5 +416,6 @@ namespace RPA_AutoUpdateAnchor
                 }
             }
         }
+        
     }
 }
